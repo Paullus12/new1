@@ -1,0 +1,129 @@
+{% extends 'polls/base.html' %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>тест</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.9/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/jquery@3.1.1/dist/jquery.js"></script>
+    <script src="https://unpkg.com/select2@4.0.3/dist/js/select2.js"></script>
+    
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/select2@4.0.3/dist/css/select2.min.css"
+    />
+    <style>
+      html,
+      body {
+        font: 20px/30px sans-serif;
+      }
+      select {
+        min-width: 500px;
+      }
+    </style>
+    
+    </head>
+<body class="container">
+    {% block bar %}
+        <div class="container">
+    <header class="d-flex justify-content-center py-3">
+       <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" aria-current="page">Главная</a></li>
+        <li class="nav-item"><a href="{% url 'creat' %}" class="nav-link  active" aria-current="page">Заполнение анкеты</a>
+          <li class="nav-item"><a href="{% url 'table' %}" class="nav-link" aria-current="page">Таблица</a>
+            <li class="nav-item"><a href="{% url 'result' %}" class="nav-link" aria-current="page">Аналитика</a>
+        
+      </ul>
+   </header>
+  </div>
+{% endblock %}
+
+{% block content %}
+
+  <form action="{% url 'creat' %}" method="post">
+    {% csrf_token %}
+    <p>
+      <label>Введите имя</label><br>
+      {{ form.name }}
+      
+    </p>
+    <p>
+      <label>Введите фамилию</label><br>
+      {{ form.surname }}
+      
+    </p>
+    <p>
+      <label>Введите группу</label><br>
+      {{ form.group }}
+      
+    </p>
+    <p>
+      <label>Чем Вы сейчас занимаетесь?</label><br>
+      {{ form.employment }}
+      
+    </p>
+    <p>
+      <label>Если работаете, укажите место работы</label><br>
+      {{ form.work }}
+      
+    </p>
+    <p>
+      <label>Выберете программы в которых имеете опыт работы</label><br>
+      {{ form.expirience }}
+      
+    </p>
+    <p>
+      <label>Выберете языки программирования с которыми приходилось работать</label><br>
+
+      {{ form.language }}
+      
+    </p>
+    <p>
+      <label>Выберете темы в порядке приоретета</label><br>
+      <label> тема1 <br>{{ form.theme1 }}</label><t><t>
+      <label>тема2 <br>{{ form.theme2 }}</label><t>
+      <label>тема3 <br>{{ form.theme3 }}</label><t>
+      <label>тема4 <br>{{ form.theme4 }}</label><t>
+      
+    </p>
+    <p>
+      <label>Дополнительная информация о себе</label><br>
+      {{ form.info }}
+      
+    </p>
+
+    <button type="submit">Добавить</button>
+  </form>
+
+{% endblock %}
+
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

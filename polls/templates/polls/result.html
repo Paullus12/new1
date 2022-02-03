@@ -1,0 +1,288 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Результат</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.9/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    
+</head>
+<body class="container">
+    {% block bar %}
+        <div class="container">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" aria-current="page">Главная</a></li>
+        <li class="nav-item"><a href="{% url 'creat' %}" class="nav-link" aria-current="page">Заполнение анкеты</a>
+        
+        <li class="nav-item"><a href="{% url 'mine' %}" class="nav-link" aria-current="page">тест</a>
+          <li class="nav-item"><a href="{% url 'export'%}" class="nav-link" aria-current="page">Экспорт</a>
+            <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" aria-current="page">Главная</a></li>
+        <li class="nav-item"><a href="{% url 'creat' %}" class="nav-link" aria-current="page">Заполнение анкеты</a>
+          <li class="nav-item"><a href="{% url 'table' %}" class="nav-link" aria-current="page">Таблица</a>
+            <li class="nav-item"><a href="{% url 'result' %}" class="nav-link active" aria-current="page">Аналитика</a>
+      </ul>
+    </header>
+  </div>
+{% endblock %}
+
+<div class="chartBox" > 
+    <canvas id="myChart"  width="100" height="20"></canvas>
+</div>
+<div class="chartBox">
+    <canvas id="Theme1" width="100" height="20"></canvas>
+</div>
+<div class="chartBox">
+    <canvas id="Theme2" width="100" height="20"></canvas>
+</div>
+<div class="chartBox">
+    <canvas id="Theme3" width="100" height="20"></canvas>
+</div>
+<div class="chartBox">
+    <canvas id="Theme4" width="100" height="20"></canvas>
+</div>
+<script>
+
+const data ={
+    labels: [{% for i in stud.keys %}'{{i}}',{% endfor %}],
+    datasets: [{
+        label: 'Полная нагрузка',
+            data: [{% for i in stud.values %}'{{i}}',{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+
+    const config = {
+        type: 'bar',
+        data,   
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+         }
+        
+     };
+     
+     const myChart = new Chart(
+     document.getElementById('myChart'),
+     config 
+     );
+     
+     //Theme1
+    const dt1 ={
+    labels: [{% for i in tn1.keys %}'{{i}}',{% endfor %}],
+    datasets: [{
+        label: 'Тема1',
+            data: [{% for i in tn1.values %}'{{i}}',{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+
+
+
+     const theme1 = {
+        type: 'bar',
+        data: dt1,   
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+         }
+        
+     };
+
+     const Theme1 = new Chart(
+     document.getElementById('Theme1'),
+     theme1 
+     );
+     //Theme2
+    const dt2 ={
+    labels: [{% for i in tn2.keys %}'{{i}}',{% endfor %}],
+    datasets: [{
+        label: 'Тема2',
+            data: [{% for i in tn2.values %}'{{i}}',{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+
+
+
+     const theme2 = {
+        type: 'bar',
+        data: dt2,   
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+         }
+        
+     };
+
+     const Theme2 = new Chart(
+     document.getElementById('Theme2'),
+     theme2 
+     );
+     //Theme3
+    const dt3 ={
+    labels: [{% for i in tn3.keys %}'{{i}}',{% endfor %}],
+    datasets: [{
+        label: 'Тема3',
+            data: [{% for i in tn3.values %}'{{i}}',{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+
+
+
+     const theme3 = {
+        type: 'bar',
+        data: dt3,   
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+         }
+        
+     };
+
+     const Theme3 = new Chart(
+     document.getElementById('Theme3'),
+     theme3 
+     );
+     //Theme4
+    const dt4 ={
+    labels: [{% for i in tn4.keys %}'{{i}}',{% endfor %}],
+    datasets: [{
+        label: 'Тема4',
+            data: [{% for i in tn4.values %}'{{i}}',{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+
+
+
+     const theme4 = {
+        type: 'bar',
+        data: dt4,   
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+         }
+        
+     };
+
+     const Theme4 = new Chart(
+     document.getElementById('Theme4'),
+     theme4 
+     );
+    
+
+
+
+
+
+</script>
+
+   
+</body>
+</html>
+
+
