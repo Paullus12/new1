@@ -24,9 +24,8 @@ router.register('api/theme', ThemeView)
 urlpatterns = [
     path('', views.index, name='home'),
     path('creat',views.creat, name='creat'),
-    path('mine/', views.mine, name = 'mine'),
+    path('table', views.table, name = 'table'),
     path('result/', views.result, name = 'result'),
-    path('table', views.person_list, name = 'table'),
     path('export/', export_data, name="export"),
     
    

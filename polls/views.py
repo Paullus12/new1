@@ -48,7 +48,7 @@ def creat(request):
 		return render(request, 'polls/creat.html',{'form':form})
 
 
-def mine(request):
+def table(request):
     
     
     
@@ -134,7 +134,7 @@ def mine(request):
 
 
 
-    return render(request, 'polls/mine.html', {'st':qs1})
+    return render(request, 'polls/table.html', {'st':qs1})
 
 """
 class ClubCharViwe(TemplateView):
@@ -264,22 +264,6 @@ class ThemeView(ModelViewSet):
 	queryset = Theme.objects.all()
 	serializer_class = ThemeSerializer
 
-
-def person_list(request):
-    table = StudentTable(Student.objects.all())
-
-    RequestConfig(request).configure(table)
-
-    export_format = request.GET.get("_export", None)
-    if TableExport.is_valid_format(export_format):
-        exporter = TableExport(export_format, table)
-        return exporter.response("table.{}".format(export_format))
-
-
-    
-    return render(request, "polls/table.html", {
-        "table": table, 
-    })
 
     
 
