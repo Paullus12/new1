@@ -27,6 +27,8 @@ urlpatterns = [
     path('table', views.table, name = 'table'),
     path('result/', views.result, name = 'result'),
     path('export/', export_data, name="export"),
+    path('login', views.login, name="login"),
+
     
    
 

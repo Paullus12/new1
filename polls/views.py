@@ -37,6 +37,11 @@ def index(request):
 	return render(request, "polls/index.html")
 
 
+
+def login(request):
+	return render(request, "polls/login.html")
+
+
 def creat(request):
 	if request.method == 'POST':
 		form = StudentForm(request.POST)

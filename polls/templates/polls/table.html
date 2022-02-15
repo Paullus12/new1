@@ -10,19 +10,33 @@
 
 <body>
   {% block bar %}
-  <div class="container">
-<header class="d-flex justify-content-center py-3">
-<ul class="nav nav-pills">
-  
-    
-      <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" aria-current="page">Главная</a></li>
-  <li class="nav-item"><a href="{% url 'creat' %}" class="nav-link" aria-current="page">Заполнение анкеты</a>
-    <li class="nav-item"><a href="{% url 'table' %}" class="nav-link  active" aria-current="page">Таблица</a>
-      <li class="nav-item"><a href="{% url 'result' %}" class="nav-link" aria-current="page">Аналитика</a>
-        <li class="nav-item"><a href="{% url 'export'%}" class="nav-link" aria-current="page">Экспорт</a>
-</ul>
-</header>
-</div>
+  {% if user.is_authenticated %}
+        <div class="container">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'table' %}" class="nav-link active" aria-current="page">Таблица</a>
+          <li class="nav-item"><a href="{% url 'result' %}" class="nav-link" aria-current="page">Аналитика</a>
+            <li class="nav-item"><a href="{% url 'export'%}" class="nav-link " aria-current="page">Экспорт</a>
+            <li class="nav-item"><a href="{% url 'admin:logout'%}" class="nav-link " aria-current="page">Выход</a>
+       
+        </ul>
+      </header>
+    </div>
+    {% else %}
+
+         
+            <div class="container">
+              <header class="d-flex justify-content-center py-3">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a href="{% url 'home' %}" class="nav-link " aria-current="page">Главная</a></li>
+                  <li class="nav-item"><a href="{% url 'creat' %}" class="nav-link" aria-current="page">Заполнение анкеты</a>
+
+            
+            
+      </ul>
+    </header>
+  </div>
+  {% endif %}
 {% endblock %}
   
   <div class="container">
